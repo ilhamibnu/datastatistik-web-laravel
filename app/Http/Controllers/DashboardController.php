@@ -46,10 +46,16 @@ class DashboardController extends Controller
         $date1 = date('Y-m-d', strtotime($date1));
         $date2 = date('Y-m-d', strtotime($date2));
 
-        if (Auth::user()->id_role == 1 || Auth::user()->id_role == 2) {
-            if ($id_user == 0 || $request->date1 == null || $request->date2 == null) {
+        if (Auth::user()->id_role == '1' || Auth::user()->id_role == '2') {
+            if ($request->date1 == null || $request->date2 == null) {
                 $user = User::all()->where('id_role', 3);
-                $isian = Isian::with('user')->get();
+
+                if ($id_user == '0') {
+                    $isian = Isian::with('user')->get();
+                } elseif ($id_user != '0') {
+                    $isian = Isian::with('user')->where('id_user', $id_user)->get();
+                }
+
                 return view('pages.dashboard', [
                     'isian' => $isian,
                     'user' => $user,
@@ -57,9 +63,9 @@ class DashboardController extends Controller
             } else {
                 $user = User::all()->where('id_role', 3);
 
-                if ($request->date1 == null || $request->date2 == null) {
-                    $isian = Isian::with('user')->where('id_user', $id_user)->get();
-                } else {
+                if ($id_user == '0') {
+                    $isian = Isian::with('user')->whereBetween('tanggal', [$date1, $date2])->get();
+                } elseif ($id_user != '0') {
                     $isian = Isian::with('user')->where('id_user', $id_user)->whereBetween('tanggal', [$date1, $date2])->get();
                 }
 
