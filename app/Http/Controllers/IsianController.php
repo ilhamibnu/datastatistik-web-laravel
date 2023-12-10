@@ -54,9 +54,7 @@ class IsianController extends Controller
             'kegiatan' => 'required',
             'progres' => 'required',
             'capaian' => 'required',
-            'data_dukung' => 'required|file|mimes:pdf,doc,docx,xls,xlsx,ppt,pptx,zip,rar,jpg,jpeg,png',
-            'link_foto' => 'required',
-            'capaian_skp' => 'required',
+            'data_dukung' => 'file|mimes:pdf,doc,docx,xls,xlsx,ppt,pptx,zip,rar,jpg,jpeg,png',
 
         ], [
             'id_user.required' => 'ID User tidak boleh kosong',
@@ -67,16 +65,11 @@ class IsianController extends Controller
             'kegiatan.required' => 'Kegiatan tidak boleh kosong',
             'progres.required' => 'Progress tidak boleh kosong',
             'capaian.required' => 'Capaian tidak boleh kosong',
-            'data_dukung.required' => 'Data Dukung tidak boleh kosong',
             'data_dukung.file' => 'Data Dukung harus berupa file',
             'data_dukung.mimes' => 'Data Dukung harus berupa file pdf,doc,docx,xls,xlsx,ppt,pptx,zip,rar,jpg,jpeg,png',
-            'link_foto.required' => 'Link Foto tidak boleh kosong',
-            'capaian_skp.required' => 'Capaian SKP tidak boleh kosong',
         ]);
 
-        $data_dukung = $request->file('data_dukung');
-        $nama_data_dukung = time() . "_" . $data_dukung->getClientOriginalName();
-        $data_dukung->move(public_path('data_dukung'), $nama_data_dukung);
+
 
         $isian = new Isian;
         $isian->id_user = $request->id_user;
@@ -87,9 +80,21 @@ class IsianController extends Controller
         $isian->kegiatan = $request->kegiatan;
         $isian->progres = $request->progres;
         $isian->capaian = $request->capaian;
-        $isian->data_dukung = $nama_data_dukung;
-        $isian->link_foto = $request->link_foto;
-        $isian->capaian_skp = $request->capaian_skp;
+
+        if ($request->link_foto == "") {
+            $isian->link_foto = "-";
+        } else {
+            $isian->link_foto = $request->link_foto;
+        }
+        if ($request->data_dukung == "") {
+            $isian->data_dukung = "-";
+        } else {
+            $data_dukung = $request->file('data_dukung');
+            $nama_data_dukung = time() . "_" . $data_dukung->getClientOriginalName();
+            $data_dukung->move(public_path('data_dukung'), $nama_data_dukung);
+            $isian->data_dukung = $nama_data_dukung;
+        }
+
         $isian->save();
 
         return redirect('/isian')->with('store', 'Data berhasil ditambahkan');
@@ -107,8 +112,6 @@ class IsianController extends Controller
             'progres' => 'required',
             'capaian' => 'required',
             'data_dukung' => 'file|mimes:pdf,doc,docx,xls,xlsx,ppt,pptx,zip,rar,jpg,jpeg,png',
-            'link_foto' => 'required',
-            'capaian_skp' => 'required',
 
         ], [
             'id_user.required' => 'ID User tidak boleh kosong',
@@ -121,45 +124,43 @@ class IsianController extends Controller
             'capaian.required' => 'Capaian tidak boleh kosong',
             'data_dukung.file' => 'Data Dukung harus berupa file',
             'data_dukung.mimes' => 'Data Dukung harus berupa file pdf,doc,docx,xls,xlsx,ppt,pptx,zip,rar,jpg,jpeg,png',
-            'link_foto.required' => 'Link Foto tidak boleh kosong',
-            'capaian_skp.required' => 'Capaian SKP tidak boleh kosong',
+
         ]);
 
         $isian = Isian::find($id);
-
-        if ($request->file('data_dukung') == "") {
-            $isian->id_user = $request->id_user;
-            $isian->tanggal = $request->tanggal;
-            $isian->jam_mulai = $request->jam_mulai;
-            $isian->jam_selesai = $request->jam_selesai;
-            $isian->rencana_kinerja = $request->rencana_kinerja;
-            $isian->kegiatan = $request->kegiatan;
-            $isian->progres = $request->progres;
-            $isian->capaian = $request->capaian;
-            $isian->link_foto = $request->link_foto;
-            $isian->capaian_skp = $request->capaian_skp;
-            $isian->save();
+        $isian->id_user = $request->id_user;
+        $isian->tanggal = $request->tanggal;
+        $isian->jam_mulai = $request->jam_mulai;
+        $isian->jam_selesai = $request->jam_selesai;
+        $isian->rencana_kinerja = $request->rencana_kinerja;
+        $isian->kegiatan = $request->kegiatan;
+        $isian->progres = $request->progres;
+        $isian->capaian = $request->capaian;
+        if ($request->link_foto == "-") {
+            $isian->link_foto = "-";
+        } elseif ($request->link_foto == "") {
+            $isian->link_foto = "-";
         } else {
-            unlink(public_path('data_dukung/' . $isian->data_dukung));
+            $isian->link_foto = $request->link_foto;
+        }
 
+        // jika input data dukuung kosong namun data dukung sebelumnya tidak kosong maka data dukung sebelumnya tidak dihapus dari folder data dukung dan data dukung sebelumnya tetap digunakan
+        if ($request->data_dukung == "-") {
+            $isian->data_dukung = $isian->data_dukung;
+        } elseif ($request->data_dukung == "") {
+            $isian->data_dukung = $isian->data_dukung;
+        } else {
+            // jika input data dukung tidak kosong maka data dukung sebelumnya akan dihapus dari folder data dukung dan diganti dengan data dukung yang baru
+            if ($isian->data_dukung != "-") {
+                unlink(public_path('data_dukung/' . $isian->data_dukung));
+            }
             $data_dukung = $request->file('data_dukung');
             $nama_data_dukung = time() . "_" . $data_dukung->getClientOriginalName();
             $data_dukung->move(public_path('data_dukung'), $nama_data_dukung);
-
-            $isian->id_user = $request->id_user;
-            $isian->tanggal = $request->tanggal;
-            $isian->jam_mulai = $request->jam_mulai;
-            $isian->jam_selesai = $request->jam_selesai;
-            $isian->rencana_kinerja = $request->rencana_kinerja;
-            $isian->kegiatan = $request->kegiatan;
-            $isian->progres = $request->progres;
-            $isian->capaian = $request->capaian;
             $isian->data_dukung = $nama_data_dukung;
-            $isian->link_foto = $request->link_foto;
-            $isian->capaian_skp = $request->capaian_skp;
-            $isian->save();
         }
 
+        $isian->save();
         return redirect('/isian')->with('update', 'Data berhasil diubah');
     }
 
@@ -167,12 +168,12 @@ class IsianController extends Controller
     {
         $isian = Isian::find($id);
         // cek data dukung
-        if ($isian->data_dukung != "") {
+        if ($isian->data_dukung != "-") {
             unlink(public_path('data_dukung/' . $isian->data_dukung));
         }
         $isian->delete();
 
 
-        return redirect('/isian')->with('destroy', 'Data berhasil dihapus');
+        return redirect('/isian')->with('delete', 'Data berhasil dihapus');
     }
 }

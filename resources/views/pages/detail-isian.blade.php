@@ -59,10 +59,7 @@
                             <th>Link Foto</th>
                             <td><a href="{{ $isian->link_foto }}" target="_blank">{{ $isian->link_foto }}</a></td>
                         </tr>
-                        <tr>
-                            <th>Capaian Skp</th>
-                            <td>{{ $isian->capaian_skp }}</td>
-                        </tr>
+
 
                     </table>
                 </div>

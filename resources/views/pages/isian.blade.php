@@ -51,7 +51,7 @@
                                 <th>Capaian</th>
                                 <th>Data Dukung</th>
                                 <th>Link Foto</th>
-                                <th>Capaian Skp</th>
+
                                 <th>Action</th>
 
                             </tr>
@@ -71,13 +71,14 @@
                                 <td>{{ $data->kegiatan }}</td>
                                 <td>{{ $data->progres }}</td>
                                 <td>{{ $data->capaian }}</td>
+
                                 <td>
                                     <a href="{{ asset('data_dukung/'.$data->data_dukung) }}" target="_blank">{{ $data->data_dukung }}</a>
                                 </td>
                                 <td>
                                     <a href="{{ $data->link_foto }}" target="_blank">{{ $data->link_foto }}</a>
                                 </td>
-                                <td>{{ $data->capaian_skp }}</td>
+
 
                                 @if(Auth::user()->id_role == 1 || Auth::user()->id_role == 3)
                                 <td>
@@ -150,7 +151,7 @@
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <label for="recipient-name" class="control-label">Jam Mulai</label>
+                                                    <label for="recipient-name" class="control-label">Jam Selesai</label>
                                                     <input name="jam_selesai" type="time" class="form-control" value="{{ $data->jam_selesai }}">
                                                 </div>
 
@@ -193,14 +194,7 @@
                                                     <input name="link_foto" value="{{ $data->link_foto }}" type="text" class="form-control">
                                                 </div>
 
-                                                <div class="form-group mb-4">
-                                                    <label for="exampleFormControlSelect1">Capaian Skp</label>
-                                                    <select name="capaian_skp" class="form-control" id="exampleFormControlSelect1">
-                                                        <option value="{{ $data->capaian_skp }}">{{ $data->capaian_skp }}</option>
-                                                        <option value="Ya">Ya</option>
-                                                        <option value="Tidak">Tidak</option>
-                                                    </select>
-                                                </div>
+
 
                                             </div>
                                             <div class="modal-footer">
@@ -243,7 +237,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="recipient-name" class="control-label">Jam Mulai</label>
+                                        <label for="recipient-name" class="control-label">Jam Selesai</label>
                                         <input name="jam_selesai" type="time" class="form-control" value="" required>
                                     </div>
 
@@ -275,7 +269,7 @@
                                                 <span class="input-group-text">Upload</span>
                                             </div>
                                             <div class="custom-file">
-                                                <input name="data_dukung" type="file" class="custom-file-input" id="inputGroupFile01" required>
+                                                <input name="data_dukung" type="file" class="custom-file-input" id="inputGroupFile01">
                                                 <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
                                             </div>
                                         </div>
@@ -283,17 +277,10 @@
 
                                     <div class="form-group">
                                         <label for="recipient-name" class="control-label">Link Foto</label>
-                                        <input name="link_foto" value="" type="text" class="form-control" required>
+                                        <input name="link_foto" value="" type="text" class="form-control">
                                     </div>
 
-                                    <div class="form-group mb-4">
-                                        <label for="exampleFormControlSelect1">Capaian</label>
-                                        <select name="capaian_skp" class="form-control" id="exampleFormControlSelect1" required>
-                                            <option value="">Pilih</option>
-                                            <option value="Ya">Ya</option>
-                                            <option value="Tidak">Tidak</option>
-                                        </select>
-                                    </div>
+
 
                                 </div>
                                 <div class="modal-footer">

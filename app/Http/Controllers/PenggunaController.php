@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Role;
+use App\Models\Isian;
 use Illuminate\Support\Facades\Auth;
 
 class PenggunaController extends Controller
@@ -119,6 +120,13 @@ class PenggunaController extends Controller
     public function destroy($id)
     {
         $user = User::find($id);
+
+        // cek id user pada tb isian
+        $isian = Isian::where('id_user', $id)->get();
+
+        if (count($isian) > 0) {
+            return redirect('/pengguna')->with('delete', 'Pengguna gagal dihapus, karena masih memiliki isian');
+        }
 
         // Hapus foto
         unlink(public_path('foto-user/' . $user->foto));

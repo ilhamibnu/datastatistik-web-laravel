@@ -21,7 +21,6 @@ class Isian extends Model
         'capaian',
         'data_dukung',
         'link_foto',
-        'capaian_skp',
         'id_user'
     ];
 

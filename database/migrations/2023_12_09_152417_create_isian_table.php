@@ -22,7 +22,6 @@ return new class extends Migration
             $table->string('capaian');
             $table->string('data_dukung');
             $table->string('link_foto');
-            $table->string('capaian_skp');
             $table->timestamps();
         });
     }
