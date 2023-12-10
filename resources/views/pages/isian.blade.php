@@ -8,11 +8,8 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Zero Configuration</h4>
-                <h6 class="card-subtitle">DataTables has most features enabled by default, so all you
-                    need to do to use it with your own tables is to call the construction
-                    function:<code> $().DataTable();</code>. You can refer full documentation from here
-                    <a href="https://datatables.net/">Datatables</a></h6>
+                <h4 class="card-title">Data Isian</h4>
+
                 @if($errors->any())
                 <div class="alert alert-danger alert-dismissible fade show mt-2">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>

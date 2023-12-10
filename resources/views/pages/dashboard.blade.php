@@ -43,35 +43,27 @@
     <form action="/dashboard" method="post">
         @csrf
         <div class="card-body">
-            <h4 class="card-title">Striped rows</h4>
-            <h6 class="card-subtitle">Use <code>.table-striped</code> to add zebra-striping to any
-                table row within the <code>&lt;tbody&gt;</code>.</h6>
-        </div>
-        <div class="card-body">
-            <h4 class="card-title">Input Type Date</h4>
-            <h6 class="card-subtitle">Using <code>input type="date"</code></h6>
+            <h4 class="card-title">Pilih Tanggal</h4>
 
             <div class="form-group">
-                <input name="date1" type="date" class="form-control" value="">
+                <input name="date1" type="date" class="form-control">
             </div>
 
         </div>
         <div class="card-body">
-            <h4 class="card-title">Input Type Date</h4>
-            <h6 class="card-subtitle">Using <code>input type="date"</code></h6>
+            <h4 class="card-title">Pilih Tanggal</h4>
 
             <div class="form-group">
-                <input name="date2" type="date" class="form-control" value="">
+                <input name="date2" type="date" class="form-control">
             </div>
 
         </div>
         <div class="card-body">
-            <h4 class="card-title">Select</h4>
+            <h4 class="card-title">Pilih User</h4>
 
             <div class="form-group mb-1">
-                <label for="exampleFormControlSelect1">Nama</label>
                 <select name="id_user" class="form-control" id="exampleFormControlSelect1">
-                    <option selected value="0">-- Pilih Nama --</option>
+                    <option selected value="0">-- Pilih --</option>
                     @foreach ($user as $datauser)
                     <option value="{{ $datauser->id }}">{{ $datauser->name }}</option>
                     @endforeach
