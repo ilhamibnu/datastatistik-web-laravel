@@ -30,6 +30,7 @@ Route::get('/logout', [AuthController::class, 'logout'])->middleware('IsLogin');
 Route::post('/updateprofil', [AuthController::class, 'updateprofil'])->middleware('IsLogin');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('IsLogin');
+Route::post('/dashboard', [DashboardController::class, 'report'])->middleware('IsLogin');
 
 
 Route::get('/pengguna', [PenggunaController::class, 'index'])->middleware('IsLogin');

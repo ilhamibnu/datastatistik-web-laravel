@@ -38,7 +38,178 @@
 </div>
 @endsection
 
+@section('content')
+<div class="card">
+    <form action="/dashboard" method="post">
+        @csrf
+        <div class="card-body">
+            <h4 class="card-title">Striped rows</h4>
+            <h6 class="card-subtitle">Use <code>.table-striped</code> to add zebra-striping to any
+                table row within the <code>&lt;tbody&gt;</code>.</h6>
+        </div>
+        <div class="card-body">
+            <h4 class="card-title">Input Type Date</h4>
+            <h6 class="card-subtitle">Using <code>input type="date"</code></h6>
+
+            <div class="form-group">
+                <input name="date1" type="date" class="form-control" value="">
+            </div>
+
+        </div>
+        <div class="card-body">
+            <h4 class="card-title">Input Type Date</h4>
+            <h6 class="card-subtitle">Using <code>input type="date"</code></h6>
+
+            <div class="form-group">
+                <input name="date2" type="date" class="form-control" value="">
+            </div>
+
+        </div>
+        <div class="card-body">
+            <h4 class="card-title">Select</h4>
+
+            <div class="form-group mb-1">
+                <label for="exampleFormControlSelect1">Nama</label>
+                <select name="id_user" class="form-control" id="exampleFormControlSelect1">
+                    <option selected value="0">-- Pilih Nama --</option>
+                    @foreach ($user as $datauser)
+                    <option value="{{ $datauser->id }}">{{ $datauser->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+        </div>
+
+        <div class="text-center mb-3">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+
+    </form>
+</div>
+<div class="card">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table datatables table-hover responsive nowrap" style="width:100%" id="dataTable-1">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Name</th>
+                        <th>Tanggal</th>
+                        <th>Jam Mulai</th>
+                        <th>Jam Selesai</th>
+                        <th>Rencana Kinerja</th>
+                        <th>Kegiatan</th>
+                        <th>Progres</th>
+                        <th>Capaian</th>
+                        <th>Data Dukung</th>
+                        <th>Link Foto</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @php
+                    $no = 1;
+                    @endphp
+                    @foreach($isian as $data)
+                    <tr>
+                        <td>{{ $no++ }}</td>
+                        <td>{{ $data->user->name }}</td>
+                        <td>{{ $data->tanggal }}</td>
+                        <td>{{ $data->jam_mulai }}</td>
+                        <td>{{ $data->jam_selesai }}</td>
+                        <td>{{ $data->rencana_kinerja }}</td>
+                        <td>{{ $data->kegiatan }}</td>
+                        <td>{{ $data->progres }}</td>
+                        <td>{{ $data->capaian }}</td>
+
+                        <td>
+                            <a href="{{ asset('data_dukung/'.$data->data_dukung) }}" target="_blank">{{ $data->data_dukung }}</a>
+                        </td>
+                        <td>
+                            <a href="{{ $data->link_foto }}" target="_blank">{{ $data->link_foto }}</a>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@endsection
+
 @section('script')
+<script>
+    $('#dataTable-1').DataTable({
+        autoWidth: true,
+        // "lengthMenu": [
+        //     [16, 32, 64, -1],
+        //     [16, 32, 64, "All"]
+        // ]
+        dom: 'Bfrtip',
+
+
+        lengthMenu: [
+            [10, 25, 50, -1]
+            , ['10 rows', '25 rows', '50 rows', 'Show all']
+        ],
+
+        buttons: [{
+                extend: 'colvis'
+                , className: 'btn btn-primary btn-sm'
+                , text: 'Column Visibility',
+                // columns: ':gt(0)'
+
+
+            },
+
+            {
+
+                extend: 'pageLength'
+                , className: 'btn btn-primary btn-sm'
+                , text: 'Page Length',
+                // columns: ':gt(0)'
+            },
+
+
+            // 'colvis', 'pageLength',
+
+            {
+                extend: 'excel'
+                , className: 'btn btn-primary btn-sm'
+                , exportOptions: {
+                    columns: [0, ':visible']
+                }
+            },
+
+            // {
+            //     extend: 'csv',
+            //     className: 'btn btn-primary btn-sm',
+            //     exportOptions: {
+            //         columns: [0, ':visible']
+            //     }
+            // },
+            {
+                extend: 'pdf'
+                , className: 'btn btn-primary btn-sm'
+                , exportOptions: {
+                    columns: [0, ':visible']
+                }
+            },
+
+            {
+                extend: 'print'
+                , className: 'btn btn-primary btn-sm'
+                , exportOptions: {
+                    columns: [0, ':visible']
+                }
+            },
+
+            // 'pageLength', 'colvis',
+            // 'copy', 'csv', 'excel', 'print'
+
+        ]
+    , });
+
+</script>
 @if(Session::get('success'))
 <script>
     Swal.fire({
