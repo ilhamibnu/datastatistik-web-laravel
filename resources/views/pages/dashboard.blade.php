@@ -23,15 +23,8 @@
                 @endforeach
             </div>
             @endif
-            <h3 class="page-title text-truncate text-dark font-weight-medium mb-1">Good Morning {{ Auth::user()->name }}</h3>
+            <h3 class="page-title text-truncate text-dark font-weight-medium mb-1">Dashboard</h3>
             <div class="d-flex align-items-center">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb m-0 p-0">
-                        <li class="breadcrumb-item"><a href="index.html">Dashboard</a>
-                        </li>
-                    </ol>
-                </nav>
-
             </div>
         </div>
     </div>
@@ -46,7 +39,7 @@
             <h4 class="card-title">Pilih Tanggal</h4>
 
             <div class="form-group">
-                <input name="date1" type="date" class="form-control">
+                <input name="date1" value="{{ Session::get('date1') }}" type="date" class="form-control">
             </div>
 
         </div>
@@ -54,7 +47,7 @@
             <h4 class="card-title">Pilih Tanggal</h4>
 
             <div class="form-group">
-                <input name="date2" type="date" class="form-control">
+                <input name="date2" value="{{ Session::get('date2') }}" type="date" class="form-control">
             </div>
 
         </div>
@@ -63,7 +56,18 @@
 
             <div class="form-group mb-1">
                 <select name="id_user" class="form-control" id="exampleFormControlSelect1">
+                    @if (Session::get('id_user') != null)
+                    <option selected value="{{ Session::get('id_user') }}">
+                        <?php
+                        $userr = DB::table('tb_user')->where('id', Session::get('id_user'))->first();
+                        echo $userr->name;
+                        ?>
+
+                    </option>
+                    @else
                     <option selected value="0">-- Pilih --</option>
+                    @endif
+
                     @foreach ($user as $datauser)
                     <option value="{{ $datauser->id }}">{{ $datauser->name }}</option>
                     @endforeach
@@ -73,7 +77,7 @@
         </div>
 
         <div class="text-center mb-3">
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary">Cek</button>
         </div>
 
     </form>
@@ -89,10 +93,10 @@
                         <th>Tanggal</th>
                         <th>Jam Mulai</th>
                         <th>Jam Selesai</th>
-                        <th>Rencana Kinerja</th>
+
                         <th>Kegiatan</th>
                         <th>Progres</th>
-                        <th>Capaian</th>
+
                         <th>Data Dukung</th>
                         <th>Link Foto</th>
                     </tr>
@@ -108,10 +112,10 @@
                         <td>{{ $data->tanggal }}</td>
                         <td>{{ $data->jam_mulai }}</td>
                         <td>{{ $data->jam_selesai }}</td>
-                        <td>{{ $data->rencana_kinerja }}</td>
+
                         <td>{{ $data->kegiatan }}</td>
                         <td>{{ $data->progres }}</td>
-                        <td>{{ $data->capaian }}</td>
+
 
                         <td>
                             <a href="{{ asset('data_dukung/'.$data->data_dukung) }}" target="_blank">{{ $data->data_dukung }}</a>

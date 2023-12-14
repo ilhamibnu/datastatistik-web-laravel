@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Isian;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 
 class DashboardController extends Controller
@@ -38,6 +39,10 @@ class DashboardController extends Controller
 
     public function report(Request $request)
     {
+        Session::flash('date1', $request->date1);
+        Session::flash('date2', $request->date2);
+        Session::flash('id_user', $request->id_user);
+
         $date1 = $request->date1;
         $date2 = $request->date2;
         $id_user = $request->id_user;

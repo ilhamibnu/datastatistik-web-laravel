@@ -31,7 +31,7 @@
                     @if(Auth::user()->id_role == 2)
                     @else
                     <div class="align-right text-right mb-3">
-                        <button class="btn btn-primary btn-sm mb-3" data-toggle="modal" data-target="#add"><i class="fas fa-plus"></i></button>
+                        <button class="btn btn-primary btn-sm mb-3" data-toggle="modal" data-target="#add"><i class="fas fa-plus"></i><span> Tambah</span></button>
                     </div>
                     @endif
                     <table class="table datatables table-hover responsive nowrap" style="width:100%" id="dataTable-1">

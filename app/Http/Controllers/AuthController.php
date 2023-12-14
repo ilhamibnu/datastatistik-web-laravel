@@ -51,7 +51,7 @@ class AuthController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required|unique:tb_user,email,' . Auth::user()->id,
-            'foto' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'foto' => 'image|mimes:jpeg,png,jpg,gif,svg',
             'repassword' => 'same:password',
         ], [
             'name.required' => 'Nama tidak boleh kosong',
@@ -59,7 +59,6 @@ class AuthController extends Controller
             'email.unique' => 'Email sudah terdaftar',
             'foto.image' => 'Foto harus berupa gambar',
             'foto.mimes' => 'Foto harus berupa gambar',
-            'foto.max' => 'Foto maksimal 2MB',
             'repassword.same' => 'Re-Password tidak sama dengan Password',
         ]);
 

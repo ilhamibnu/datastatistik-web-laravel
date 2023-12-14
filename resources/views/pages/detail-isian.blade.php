@@ -32,10 +32,7 @@
                             <td>{{ $isian->jam_selesai }}</td>
 
                         </tr>
-                        <tr>
-                            <th>Rencana Kinerja</th>
-                            <td>{{ $isian->rencana_kinerja }}</td>
-                        </tr>
+
                         <tr>
                             <th>Kegiatan</th>
                             <td>{{ $isian->kegiatan }}</td>
@@ -44,10 +41,7 @@
                             <th>Progres</th>
                             <td>{{ $isian->progres }}</td>
                         </tr>
-                        <tr>
-                            <th>Capaian</th>
-                            <td>{{ $isian->capaian }}</td>
-                        </tr>
+
                         <tr>
                             <th>Data Dukung</th>
                             <td><a href="{{ asset('data_dukung/'.$isian->data_dukung) }}" target="_blank">{{ $isian->data_dukung }}</a></td>

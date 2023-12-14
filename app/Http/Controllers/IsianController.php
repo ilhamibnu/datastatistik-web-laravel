@@ -50,10 +50,8 @@ class IsianController extends Controller
             'tanggal' => 'required',
             'jam_mulai' => 'required',
             'jam_selesai' => 'required',
-            'rencana_kinerja' => 'required',
             'kegiatan' => 'required',
             'progres' => 'required',
-            'capaian' => 'required',
             'data_dukung' => 'file|mimes:pdf,doc,docx,xls,xlsx,ppt,pptx,zip,rar,jpg,jpeg,png',
 
         ], [
@@ -61,10 +59,8 @@ class IsianController extends Controller
             'tanggal.required' => 'Tanggal tidak boleh kosong',
             'jam_mulai.required' => 'Jam Mulai tidak boleh kosong',
             'jam_selesai.required' => 'Jam Selesai tidak boleh kosong',
-            'rencana_kinerja.required' => 'Rencana Kinerja tidak boleh kosong',
             'kegiatan.required' => 'Kegiatan tidak boleh kosong',
             'progres.required' => 'Progress tidak boleh kosong',
-            'capaian.required' => 'Capaian tidak boleh kosong',
             'data_dukung.file' => 'Data Dukung harus berupa file',
             'data_dukung.mimes' => 'Data Dukung harus berupa file pdf,doc,docx,xls,xlsx,ppt,pptx,zip,rar,jpg,jpeg,png',
         ]);
@@ -76,10 +72,8 @@ class IsianController extends Controller
         $isian->tanggal = $request->tanggal;
         $isian->jam_mulai = $request->jam_mulai;
         $isian->jam_selesai = $request->jam_selesai;
-        $isian->rencana_kinerja = $request->rencana_kinerja;
         $isian->kegiatan = $request->kegiatan;
         $isian->progres = $request->progres;
-        $isian->capaian = $request->capaian;
 
         if ($request->link_foto == "") {
             $isian->link_foto = "-";
@@ -107,10 +101,8 @@ class IsianController extends Controller
             'tanggal' => 'required',
             'jam_mulai' => 'required',
             'jam_selesai' => 'required',
-            'rencana_kinerja' => 'required',
             'kegiatan' => 'required',
             'progres' => 'required',
-            'capaian' => 'required',
             'data_dukung' => 'file|mimes:pdf,doc,docx,xls,xlsx,ppt,pptx,zip,rar,jpg,jpeg,png',
 
         ], [
@@ -118,10 +110,8 @@ class IsianController extends Controller
             'tanggal.required' => 'Tanggal tidak boleh kosong',
             'jam_mulai.required' => 'Jam Mulai tidak boleh kosong',
             'jam_selesai.required' => 'Jam Selesai tidak boleh kosong',
-            'rencana_kinerja.required' => 'Rencana Kinerja tidak boleh kosong',
             'kegiatan.required' => 'Kegiatan tidak boleh kosong',
             'progres.required' => 'Progress tidak boleh kosong',
-            'capaian.required' => 'Capaian tidak boleh kosong',
             'data_dukung.file' => 'Data Dukung harus berupa file',
             'data_dukung.mimes' => 'Data Dukung harus berupa file pdf,doc,docx,xls,xlsx,ppt,pptx,zip,rar,jpg,jpeg,png',
 
@@ -132,10 +122,8 @@ class IsianController extends Controller
         $isian->tanggal = $request->tanggal;
         $isian->jam_mulai = $request->jam_mulai;
         $isian->jam_selesai = $request->jam_selesai;
-        $isian->rencana_kinerja = $request->rencana_kinerja;
         $isian->kegiatan = $request->kegiatan;
         $isian->progres = $request->progres;
-        $isian->capaian = $request->capaian;
         if ($request->link_foto == "-") {
             $isian->link_foto = "-";
         } elseif ($request->link_foto == "") {

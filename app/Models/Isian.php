@@ -15,10 +15,8 @@ class Isian extends Model
         'tanggal',
         'jam_mulai',
         'jam_selesai',
-        'rencana_kinerja',
         'kegiatan',
         'progres',
-        'capaian',
         'data_dukung',
         'link_foto',
         'id_user'

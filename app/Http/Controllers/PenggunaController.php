@@ -40,7 +40,7 @@ class PenggunaController extends Controller
             'email' => 'required|unique:tb_user',
             'password' => 'required',
             'repassword' => 'required|same:password',
-            'foto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'foto' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
         ], [
             'name.required' => 'Nama tidak boleh kosong',
             'id_role.required' => 'Role tidak boleh kosong',
@@ -52,7 +52,6 @@ class PenggunaController extends Controller
             'foto.required' => 'Foto tidak boleh kosong',
             'foto.image' => 'Foto harus berupa gambar',
             'foto.mimes' => 'Foto harus berupa gambar',
-            'foto.max' => 'Foto maksimal 2MB',
         ]);
 
         $foto = $request->file('foto');
@@ -76,7 +75,7 @@ class PenggunaController extends Controller
             'name' => 'required',
             'id_role' => 'required',
             'email' => 'required|unique:tb_user,email,' . $id,
-            'foto' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'foto' => 'image|mimes:jpeg,png,jpg,gif,svg',
             'repassword' => 'same:password',
         ], [
             'name.required' => 'Nama tidak boleh kosong',
@@ -84,7 +83,6 @@ class PenggunaController extends Controller
             'email.required' => 'Email tidak boleh kosong',
             'foto.image' => 'Foto harus berupa gambar',
             'foto.mimes' => 'Foto harus berupa gambar',
-            'foto.max' => 'Foto maksimal 2MB',
             'repassword.same' => 'Re-Password tidak sama dengan Password',
         ]);
 

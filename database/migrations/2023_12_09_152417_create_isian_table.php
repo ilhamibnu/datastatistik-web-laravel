@@ -16,10 +16,8 @@ return new class extends Migration
             $table->string('tanggal');
             $table->string('jam_mulai');
             $table->string('jam_selesai');
-            $table->string('rencana_kinerja');
             $table->string('kegiatan');
             $table->string('progres');
-            $table->string('capaian');
             $table->string('data_dukung');
             $table->string('link_foto');
             $table->timestamps();
