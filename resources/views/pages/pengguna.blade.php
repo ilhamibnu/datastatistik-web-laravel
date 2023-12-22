@@ -347,4 +347,14 @@
 
 </script>
 @endif
+@if(Session::get('gagal'))
+<script>
+    Swal.fire({
+        icon: 'error'
+        , title: 'Oops..'
+        , text: 'Data Masih Memiliki Relasi'
+    , });
+
+</script>
+@endif
 @endsection

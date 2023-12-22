@@ -36,52 +36,62 @@
     <form action="/dashboard" method="post">
         @csrf
         <div class="card-body">
-            <h4 class="card-title">Pilih Tanggal</h4>
+            <div class="form-body">
+                <div class="form-group">
+                    <div class="row align-items-center text-center justify-content-center">
+                        <div class="col-md-3">
+                            <h4 class="card-title">Pilih Tanggal</h4>
+                            <div class="form-group">
+                                <input name="date1" value="{{ Session::get('date1') }}" type="date" class="form-control">
+                            </div>
+                        </div>
 
-            <div class="form-group">
-                <input name="date1" value="{{ Session::get('date1') }}" type="date" class="form-control">
+                        <div class="col-md-3">
+                            <h4 class="card-title">Pilih Tanggal</h4>
+
+                            <div class="form-group">
+                                <input name="date2" value="{{ Session::get('date2') }}" type="date" class="form-control">
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-3">
+                            <h4 class="card-title">Pilih User</h4>
+                            <div class="form-group">
+                                <select name="id_user" class="form-control" id="exampleFormControlSelect1">
+                                    @if (Session::get('id_user') != null)
+                                    <option selected value="{{ Session::get('id_user') }}">
+                                        <?php
+                                        $userr = DB::table('tb_user')->where('id', Session::get('id_user'))->first();
+                                        echo $userr->name;
+                                        ?>
+
+                                    </option>
+                                    @else
+                                    <option selected value="0">-- Pilih --</option>
+                                    @endif
+
+                                    @foreach ($user as $datauser)
+                                    <option value="{{ $datauser->id }}">{{ $datauser->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 align-items-center text-center row justify-content-center">
+                            <button type="submit" class="btn btn-primary">Cari</button>
+                        </div>
+
+
+                    </div>
+                </div>
             </div>
 
-        </div>
-        <div class="card-body">
-            <h4 class="card-title">Pilih Tanggal</h4>
-
-            <div class="form-group">
-                <input name="date2" value="{{ Session::get('date2') }}" type="date" class="form-control">
-            </div>
-
-        </div>
-        <div class="card-body">
-            <h4 class="card-title">Pilih User</h4>
-
-            <div class="form-group mb-1">
-                <select name="id_user" class="form-control" id="exampleFormControlSelect1">
-                    @if (Session::get('id_user') != null)
-                    <option selected value="{{ Session::get('id_user') }}">
-                        <?php
-                        $userr = DB::table('tb_user')->where('id', Session::get('id_user'))->first();
-                        echo $userr->name;
-                        ?>
-
-                    </option>
-                    @else
-                    <option selected value="0">-- Pilih --</option>
-                    @endif
-
-                    @foreach ($user as $datauser)
-                    <option value="{{ $datauser->id }}">{{ $datauser->name }}</option>
-                    @endforeach
-                </select>
-            </div>
-
-        </div>
-
-        <div class="text-center mb-3">
-            <button type="submit" class="btn btn-primary">Cek</button>
         </div>
 
     </form>
 </div>
+
 <div class="card">
     <div class="card-body">
         <div class="table-responsive">

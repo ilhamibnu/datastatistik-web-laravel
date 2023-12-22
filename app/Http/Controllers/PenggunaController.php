@@ -123,11 +123,14 @@ class PenggunaController extends Controller
         $isian = Isian::where('id_user', $id)->get();
 
         if (count($isian) > 0) {
-            return redirect('/pengguna')->with('delete', 'Pengguna gagal dihapus, karena masih memiliki isian');
+            return redirect('/pengguna')->with('gagal', 'Pengguna gagal dihapus, karena masih memiliki isian');
         }
 
-        // Hapus foto
-        unlink(public_path('foto-user/' . $user->foto));
+        // cek apa ada foto
+        if ($user->foto != '') {
+            // Hapus foto
+            unlink(public_path('foto-user/' . $user->foto));
+        }
 
         $user->delete();
 
