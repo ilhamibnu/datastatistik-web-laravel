@@ -21,7 +21,7 @@
 <![endif]-->
 </head>
 
-<body>
+<body class="background">
     <div class="main-wrapper">
         <!-- ============================================================== -->
         <!-- Preloader - style you can find in spinners.css -->
@@ -38,13 +38,13 @@
         <!-- ============================================================== -->
         <!-- Login box.scss -->
         <!-- ============================================================== -->
-        <div class="auth-wrapper d-flex no-block justify-content-center align-items-center position-relative" style="background:url(assets/images/big/auth-bg.jpg) no-repeat center center;">
+        <div class="auth-wrapper d-flex no-block justify-content-center align-items-center position-relative">
             <div class="auth-box row justify-content-center">
 
                 <div class="col-lg-5 col-md-7 bg-white">
                     <div class="p-3">
                         <div class="text-center">
-                            <img class="img-fluid" src="{{ asset('logo/logo1.png') }}" alt="wrapkit">
+                            <img class="img-fluid" src="{{ asset('logo/logo-bps-prob-2.jpg') }}" alt="wrapkit">
                         </div>
                         <h2 class="mt-3 text-center">Sign In</h2>
 
