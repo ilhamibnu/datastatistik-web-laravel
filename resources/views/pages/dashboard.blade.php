@@ -54,6 +54,11 @@
                             </div>
                         </div>
 
+                        @if(Auth::user()->id_role == '3')
+
+                        <input hidden type="text" name="id_user" value="{{ Auth::user()->id }}">
+
+                        @else
 
                         <div class="col-md-3">
                             <h4 class="card-title">Pilih User</h4>
@@ -77,6 +82,8 @@
                                 </select>
                             </div>
                         </div>
+
+                        @endif
 
                         <div class="col-md-3 align-items-center text-center row justify-content-center">
                             <button type="submit" class="btn btn-primary">Cari</button>
@@ -103,12 +110,10 @@
                         <th>Tanggal</th>
                         <th>Jam Mulai</th>
                         <th>Jam Selesai</th>
-
                         <th>Kegiatan</th>
                         <th>Progres</th>
-
                         <th>Data Dukung</th>
-                        <th>Link Foto</th>
+                        <th>File Foto</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -119,7 +124,13 @@
                     <tr>
                         <td>{{ $no++ }}</td>
                         <td>{{ $data->user->name }}</td>
-                        <td>{{ $data->tanggal }}</td>
+                        <td>
+                            <?php
+                            $tanggal = date('d-m-Y', strtotime($data->tanggal));
+                            echo $tanggal;
+                            ?>
+
+                        </td>
                         <td>{{ $data->jam_mulai }}</td>
                         <td>{{ $data->jam_selesai }}</td>
 

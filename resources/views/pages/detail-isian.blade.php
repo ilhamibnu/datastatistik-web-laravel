@@ -21,7 +21,12 @@
 
                         <tr>
                             <th>Tanggal</th>
-                            <td>{{ $isian->tanggal }}</td>
+                            <td>
+                                <?php
+                                $tanggal = date('d-m-Y', strtotime($isian->tanggal));
+                                echo $tanggal;
+                                ?>
+                            </td>
                         </tr>
                         <tr>
                             <th>Jam Mulai</th>

@@ -11,7 +11,7 @@
                 <a href="/dashboard">
                     <b class="logo-icon">
                         <!-- Dark Logo icon -->
-
+                        <h2 class="mt-5">SIM Magang</h2>
                         <img class="img-fluid" src="{{ asset('logo/logo3.png') }}" alt="homepage" />
                     </b>
                     <!--End Logo icon -->

@@ -44,9 +44,10 @@
                 <div class="col-lg-5 col-md-7 bg-white">
                     <div class="p-3">
                         <div class="text-center">
+                            <h2 class="fw-bold">SIM Magang</h2>
                             <img class="img-fluid" src="{{ asset('logo/logo-bps-prob-2.jpg') }}" alt="wrapkit">
                         </div>
-                        <h2 class="mt-3 text-center">Sign In</h2>
+                        <h3 class="mt-3 text-center">Sign In</h3>
 
                         <form action="/login" method="POST" class="mt-4">
                             @csrf
