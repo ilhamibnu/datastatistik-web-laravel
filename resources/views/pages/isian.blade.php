@@ -186,7 +186,15 @@
 
                                                 <div class="form-group">
                                                     <label for="recipient-name" class="control-label">File Dukung</label>
-                                                    <input name="link_foto" value="{{ $data->link_foto }}" type="text" class="form-control">
+                                                    <div class="input-group mb-3">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">Upload</span>
+                                                        </div>
+                                                        <div class="custom-file">
+                                                            <input name="link_foto" type="file" class="custom-file-input" id="inputGroupFile01">
+                                                            <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                                                        </div>
+                                                    </div>
                                                 </div>
 
 
@@ -268,8 +276,17 @@
 
                                     <div class="form-group">
                                         <label for="recipient-name" class="control-label">File Dukung</label>
-                                        <input name="link_foto" value="" type="text" class="form-control">
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Upload</span>
+                                            </div>
+                                            <div class="custom-file">
+                                                <input name="link_foto" type="file" class="custom-file-input" id="inputGroupFile01">
+                                                <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                                            </div>
+                                        </div>
                                     </div>
+
 
 
 

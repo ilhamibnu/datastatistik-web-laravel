@@ -53,6 +53,7 @@ class IsianController extends Controller
             'kegiatan' => 'required',
             'progres' => 'required',
             'data_dukung' => 'file|mimes:pdf,doc,docx,xls,xlsx,ppt,pptx,zip,rar,jpg,jpeg,png',
+            'link_foto' => 'file|mimes:pdf,doc,docx,xls,xlsx,ppt,pptx,zip,rar,jpg,jpeg,png',
 
         ], [
             'id_user.required' => 'ID User tidak boleh kosong',
@@ -63,6 +64,8 @@ class IsianController extends Controller
             'progres.required' => 'Progress tidak boleh kosong',
             'data_dukung.file' => 'Data Dukung harus berupa file',
             'data_dukung.mimes' => 'Data Dukung harus berupa file pdf,doc,docx,xls,xlsx,ppt,pptx,zip,rar,jpg,jpeg,png',
+            'link_foto.file' => 'Link Foto harus berupa file',
+            'link_foto.mimes' => 'Link Foto harus berupa file pdf,doc,docx,xls,xlsx,ppt,pptx,zip,rar,jpg,jpeg,png',
         ]);
 
 
@@ -78,7 +81,10 @@ class IsianController extends Controller
         if ($request->link_foto == "") {
             $isian->link_foto = "-";
         } else {
-            $isian->link_foto = $request->link_foto;
+            $link_foto = $request->file('link_foto');
+            $nama_link_foto = time() . "_" . $link_foto->getClientOriginalName();
+            $link_foto->move(public_path('file_dukung'), $nama_link_foto);
+            $isian->link_foto = $nama_link_foto;
         }
         if ($request->data_dukung == "") {
             $isian->data_dukung = "-";
@@ -104,6 +110,7 @@ class IsianController extends Controller
             'kegiatan' => 'required',
             'progres' => 'required',
             'data_dukung' => 'file|mimes:pdf,doc,docx,xls,xlsx,ppt,pptx,zip,rar,jpg,jpeg,png',
+            'link_foto' => 'file|mimes:pdf,doc,docx,xls,xlsx,ppt,pptx,zip,rar,jpg,jpeg,png',
 
         ], [
             'id_user.required' => 'ID User tidak boleh kosong',
@@ -114,6 +121,8 @@ class IsianController extends Controller
             'progres.required' => 'Progress tidak boleh kosong',
             'data_dukung.file' => 'Data Dukung harus berupa file',
             'data_dukung.mimes' => 'Data Dukung harus berupa file pdf,doc,docx,xls,xlsx,ppt,pptx,zip,rar,jpg,jpeg,png',
+            'link_foto.file' => 'Link Foto harus berupa file',
+            'link_foto.mimes' => 'Link Foto harus berupa file pdf,doc,docx,xls,xlsx,ppt,pptx,zip,rar,jpg,jpeg,png',
 
         ]);
 
@@ -124,12 +133,20 @@ class IsianController extends Controller
         $isian->jam_selesai = $request->jam_selesai;
         $isian->kegiatan = $request->kegiatan;
         $isian->progres = $request->progres;
+
         if ($request->link_foto == "-") {
-            $isian->link_foto = "-";
+            $isian->link_foto = $isian->link_foto;
         } elseif ($request->link_foto == "") {
-            $isian->link_foto = "-";
+            $isian->link_foto = $isian->link_foto;
         } else {
-            $isian->link_foto = $request->link_foto;
+            // jika input link foto tidak kosong maka link foto sebelumnya akan dihapus dari folder link foto dan diganti dengan link foto yang baru
+            if ($isian->link_foto != "-") {
+                unlink(public_path('file_dukung/' . $isian->link_foto));
+            }
+            $link_foto = $request->file('link_foto');
+            $nama_link_foto = time() . "_" . $link_foto->getClientOriginalName();
+            $link_foto->move(public_path('file_dukung'), $nama_link_foto);
+            $isian->link_foto = $nama_link_foto;
         }
 
         // jika input data dukuung kosong namun data dukung sebelumnya tidak kosong maka data dukung sebelumnya tidak dihapus dari folder data dukung dan data dukung sebelumnya tetap digunakan
@@ -159,6 +176,13 @@ class IsianController extends Controller
         if ($isian->data_dukung != "-") {
             unlink(public_path('data_dukung/' . $isian->data_dukung));
         }
+
+        // cek link foto
+        if ($isian->link_foto != "-") {
+            unlink(public_path('file_dukung/' . $isian->link_foto));
+        }
+
+
         $isian->delete();
 
 
