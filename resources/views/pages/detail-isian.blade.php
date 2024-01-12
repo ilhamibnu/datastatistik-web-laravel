@@ -52,8 +52,8 @@
                             <td><a href="{{ asset('data_dukung/'.$isian->data_dukung) }}" target="_blank">{{ $isian->data_dukung }}</a></td>
                         </tr>
                         <tr>
-                            <th>Link Foto</th>
-                            <td><a href="{{ $isian->link_foto }}" target="_blank">{{ $isian->link_foto }}</a></td>
+                            <th>File Dukung</th>
+                            <td><a href="{{ asset('file_dukung/'.$isian->link_foto) }}" target="_blank">{{ $isian->link_foto }}</a></td>
                         </tr>
 
 
