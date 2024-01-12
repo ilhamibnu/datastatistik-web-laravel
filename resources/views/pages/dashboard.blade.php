@@ -64,7 +64,7 @@
                             <h4 class="card-title">Pilih User</h4>
                             <div class="form-group">
                                 <select name="id_user" class="form-control" id="exampleFormControlSelect1">
-                                    @if (Session::get('id_user') != null)
+                                    @if (Session::get('id_user') != null && Session::get('id_user') != 0)
                                     <option selected value="{{ Session::get('id_user') }}">
                                         <?php
                                         $userr = DB::table('tb_user')->where('id', Session::get('id_user'))->first();
