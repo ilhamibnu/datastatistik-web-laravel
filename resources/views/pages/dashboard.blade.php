@@ -113,7 +113,7 @@
                         <th>Kegiatan</th>
                         <th>Progres</th>
                         <th>Data Dukung</th>
-                        <th>File Foto</th>
+                        <th>File Dukung</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -142,7 +142,7 @@
                             <a href="{{ asset('data_dukung/'.$data->data_dukung) }}" target="_blank">{{ $data->data_dukung }}</a>
                         </td>
                         <td>
-                            <a href="{{ $data->link_foto }}" target="_blank">{{ $data->link_foto }}</a>
+                            <a href="{{ asset('file_dukung/'.$data->link_foto) }}" target="_blank">{{ $data->link_foto }}</a>
                         </td>
                     </tr>
                     @endforeach
